@@ -38,7 +38,7 @@ gcode:
     M104 S150
     G4 P3000
     M400
-    G28                             #(changed this from CG28)
+    G28                             #(changed this from CG28, as it was going directly to the left side of the bed and crashing into the corner of purge parking area. You could replace with a movement to center of the bed first to save a few seconds.)
     Z_TILT_ADJUST
     
     M104 S150
