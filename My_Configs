@@ -1,0 +1,241 @@
+#---------------------#My Custom Macros and Configs#---------------------#
+
+[temperature_sensor Host_CPU]
+sensor_type: temperature_host
+min_temp: 10
+max_temp: 100
+
+[temperature_sensor toolhead]
+sensor_type: temperature_mcu
+sensor_mcu: THR
+min_temp: 0
+max_temp: 100
+
+
+[gcode_macro PRINT_START]
+#from Catsarecool700 - https://github.com/Catsarecool700/QIDI-Q2-optimised-start-macro/tree/main
+gcode:
+    AUTOTUNE_SHAPERS #does nothing?
+    DISABLE_ALL_SENSOR #disables the filament runout sensor
+    CLEAR_PAUSE
+    
+    {% set bedtemp = params.get('BED') | int %}
+    {% set hotendtemp = params.get('HOTEND') | int %}
+    {% set chambertemp = params.get('CHAMBER', 0) | int %}
+    {% set extruder = params.EXTRUDER|default(0)|int %}
+
+    M104 S0
+    {% if chambertemp == 0 %}
+        #M106 P3 S255               #(I commented this out to allow for control from the slicer)
+    {% endif %}
+    M140 S{bedtemp}    
+    G28                             #(changed this from CG28)
+    M141 S{chambertemp}    
+    SET_GCODE_OFFSET Z=0 MOVE=0
+    {% if printer.save_variables.variables.box_count >= 1 and printer["box_extras"] %} 
+        SAVE_VARIABLE VARIABLE=load_retry_num VALUE=0
+        SAVE_VARIABLE VARIABLE=retry_step VALUE=None
+        {% for i in range(16) %}
+            SAVE_VARIABLE VARIABLE=runout_{i} VALUE=0
+            G4 P100
+        {% endfor %}
+        {% if printer.save_variables.variables.enable_box == 1 %}
+            BOX_PRINT_START EXTRUDER={extruder} HOTENDTEMP={hotendtemp}
+            M400
+            EXTRUSION_AND_FLUSH HOTEND={hotendtemp}
+        {% endif %}
+    {% endif %}
+
+    CLEAR_NOZZLE HOTEND={hotendtemp} #does the whole purge and wipe thing - (I changed this from NOZZLE_WIPE - it did not exist in my macros)
+    #Cutting and leveling
+    #CUT_FILAMENT_1 #stupid and pointless
+    M104 S150
+    G4 P3000
+    M400
+    G28                             #(changed this from CG28)
+    Z_TILT_ADJUST
+    
+    M104 S150
+    M190 S{bedtemp}   
+    M191 S{chambertemp}
+    M400
+    G4 P3000
+    
+    BED_MESH_CALIBRATE ADAPTIVE=1 PROFILE=ADAPTIVE PROBE_COUNT=7,7 
+    SMART_PARK                      #(I added SMART_PARK, does not seem to be working for me right not for some reason)
+    G0 Z50 F600
+    G0 X260 Y5  F30000
+    {% if printer.save_variables.variables.box_count >= 1 and printer["box_extras"] and printer.save_variables.variables.enable_box == 1 %}
+        BUFFER_MONITORING ENABLE=1 
+    {% endif %}
+    M191 S{chambertemp}
+    M109 S{hotendtemp}
+    M204 S10000
+
+    set_zoffset
+    ENABLE_ALL_SENSOR
+    save_last_file
+
+[gcode_macro SPEED_TEST]
+# Custom speed test macro for QIDI Q2
+# Usage: SPEED_TEST SPEED=300 ACCEL=5000 BOUND=30 ITERATIONS=5
+# This will home, run test pattern, then home again and compare positions
+
+description: Test printer speed and acceleration by running movement patterns
+
+gcode:
+    # ============================================================
+    # PRINTER DIMENSIONS - CHANGE THESE FOR YOUR PRINTER
+    # ============================================================
+    # QIDI Q2 dimensions (X: 0-330, Y: 0-330, Z: 0-330)
+    {% set printer_x_min = 0 %}
+    {% set printer_x_max = 270 %}
+    {% set printer_y_min = 0 %}
+    {% set printer_y_max = 270 %}
+    # ============================================================
+    
+    # Get parameters from command or use defaults
+    {% set speed = params.SPEED|default(600)|int %}
+    {% set accel = params.ACCEL|default(10000)|int %}
+    {% set bound = params.BOUND|default(30)|int %}
+    {% set iterations = params.ITERATIONS|default(5)|int %}
+    
+    # Calculate safe test area with inset
+    {% set x_min = printer_x_min + bound %}
+    {% set x_max = printer_x_max - bound %}
+    {% set y_min = printer_y_min + bound %}
+    {% set y_max = printer_y_max - bound %}
+    
+    # Calculate center point for small pattern
+    {% set x_center = (printer_x_min + printer_x_max) / 2 %}
+    {% set y_center = (printer_y_min + printer_y_max) / 2 %}
+    
+    # Small pattern box size (20mm box around center)
+    {% set small_size = 20 %}
+    {% set x_center_min = x_center - (small_size / 2) %}
+    {% set x_center_max = x_center + (small_size / 2) %}
+    {% set y_center_min = y_center - (small_size / 2) %}
+    {% set y_center_max = y_center + (small_size / 2) %}
+    
+    # Save current state
+    SAVE_GCODE_STATE NAME=SPEED_TEST
+    
+    # Print test parameters
+    { action_respond_info("SPEED_TEST: %d iterations at %d mm/s, %d mm/s² accel, %dmm inset" % (iterations, speed, accel, bound)) }
+    { action_respond_info("Test area: X %.1f-%.1f, Y %.1f-%.1f" % (x_min, x_max, y_min, y_max)) }
+    
+    # Initial home and position check
+    G28
+    M400
+    GET_POSITION
+    
+    # Move to safe starting height
+    G90
+    G0 Z{bound + 10} F3000
+    
+    # Set test speed and acceleration
+    SET_VELOCITY_LIMIT VELOCITY={speed} ACCEL={accel}
+    
+    # Run test pattern
+    {% for i in range(iterations) %}
+        # Large pattern - diagonals
+        G0 X{x_min} Y{y_min} F{speed*60}
+        G0 X{x_max} Y{y_max} F{speed*60}
+        G0 X{x_min} Y{y_min} F{speed*60}
+        G0 X{x_max} Y{y_min} F{speed*60}
+        G0 X{x_min} Y{y_max} F{speed*60}
+        G0 X{x_max} Y{y_min} F{speed*60}
+        
+        # Large pattern - box perimeter
+        G0 X{x_min} Y{y_min} F{speed*60}
+        G0 X{x_min} Y{y_max} F{speed*60}
+        G0 X{x_max} Y{y_max} F{speed*60}
+        G0 X{x_max} Y{y_min} F{speed*60}
+        
+        # Small pattern - diagonals at center
+        G0 X{x_center_min} Y{y_center_min} F{speed*60}
+        G0 X{x_center_max} Y{y_center_max} F{speed*60}
+        G0 X{x_center_min} Y{y_center_min} F{speed*60}
+        G0 X{x_center_max} Y{y_center_min} F{speed*60}
+        G0 X{x_center_min} Y{y_center_max} F{speed*60}
+        G0 X{x_center_max} Y{y_center_min} F{speed*60}
+        
+        # Small pattern - box perimeter at center
+        G0 X{x_center_min} Y{y_center_min} F{speed*60}
+        G0 X{x_center_min} Y{y_center_max} F{speed*60}
+        G0 X{x_center_max} Y{y_center_max} F{speed*60}
+        G0 X{x_center_max} Y{y_center_min} F{speed*60}
+    {% endfor %}
+    
+    # Restore original velocity limits
+    SET_VELOCITY_LIMIT VELOCITY={printer.configfile.settings.printer.max_velocity} ACCEL={printer.configfile.settings.printer.max_accel}
+    
+    # Final home and position check
+    M400
+    G28
+    M400
+    GET_POSITION
+    
+    { action_respond_info("SPEED_TEST: Complete! Compare the two GET_POSITION outputs above.") }
+    { action_respond_info("If MCU positions differ by more than 1 full step, skipping occurred.") }
+    
+    # Restore previous state
+    RESTORE_GCODE_STATE NAME=SPEED_TEST
+
+
+[gcode_macro ORCA_QIDI_BOX] 
+#ADDED
+# Add to start gcode:  ORCA_QIDI_BOX T=[initial_tool]
+# T0-3 for QIDI BOX slots 1A-1D.  If more boxes are connected,
+# additional tools will be written in the same order.
+# Any tool number higher than the configured box slots or -1 
+# will disable the BOX and use the rack. 
+
+gcode: 
+    # Grab the inital tool number, save to variable t 
+    {% set t = params.get('T') | int %}
+
+    # Check if at least one BOX is connected
+    {% if printer.save_variables.variables.box_count >= 1 %}
+
+        # Check if initial tool is external spool (not in BOX)
+        {% if t >= printer.save_variables.variables.box_count * 4 or t == -1 %}
+            # Disable the BOX and desync any synced slots
+            SAVE_VARIABLE VARIABLE=enable_box VALUE=0
+
+        {% else %}
+            # If initial tool is in range for BOX, enable the BOX
+            SAVE_VARIABLE VARIABLE=enable_box VALUE=1
+
+            # Set tools T0 through T3 to slot0 through slot3
+            SAVE_VARIABLE VARIABLE=value_t0 VALUE="'slot0'"
+            SAVE_VARIABLE VARIABLE=value_t1 VALUE="'slot1'"
+            SAVE_VARIABLE VARIABLE=value_t2 VALUE="'slot2'"
+            SAVE_VARIABLE VARIABLE=value_t3 VALUE="'slot3'"
+
+            # If additional BOXes are connected, set those tools too
+            {% if printer.save_variables.variables.box_count >= 2 %}
+                SAVE_VARIABLE VARIABLE=value_t4 VALUE="'slot4'"
+                SAVE_VARIABLE VARIABLE=value_t5 VALUE="'slot5'"
+                SAVE_VARIABLE VARIABLE=value_t6 VALUE="'slot6'"
+                SAVE_VARIABLE VARIABLE=value_t7 VALUE="'slot7'"
+            {% endif %}
+
+            {% if printer.save_variables.variables.box_count >= 3 %}
+                SAVE_VARIABLE VARIABLE=value_t8 VALUE="'slot8'"
+                SAVE_VARIABLE VARIABLE=value_t9 VALUE="'slot9'"
+                SAVE_VARIABLE VARIABLE=value_t10 VALUE="'slot10'"
+                SAVE_VARIABLE VARIABLE=value_t11 VALUE="'slot11'"
+            {% endif %}
+
+            {% if printer.save_variables.variables.box_count == 4 %}
+                SAVE_VARIABLE VARIABLE=value_t12 VALUE="'slot12'"
+                SAVE_VARIABLE VARIABLE=value_t13 VALUE="'slot13'"
+                SAVE_VARIABLE VARIABLE=value_t14 VALUE="'slot14'"
+                SAVE_VARIABLE VARIABLE=value_t15 VALUE="'slot15'"
+            {% endif %}
+        {% endif %}
+    {% else %}
+        # If no boxes are connected, disable the BOX
+        SAVE_VARIABLE VARIABLE=enable_box VALUE=0
+    {% endif %}
