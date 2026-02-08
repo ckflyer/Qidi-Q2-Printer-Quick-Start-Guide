@@ -1,0 +1,63 @@
+[gcode_macro PRINT_START]
+#from Catsarecool700 - https://github.com/Catsarecool700/QIDI-Q2-optimised-start-macro/tree/main
+gcode:
+    AUTOTUNE_SHAPERS #does nothing?
+    DISABLE_ALL_SENSOR #disables the filament runout sensor
+    CLEAR_PAUSE
+    
+    {% set bedtemp = params.get('BED') | int %}
+    {% set hotendtemp = params.get('HOTEND') | int %}
+    {% set chambertemp = params.get('CHAMBER', 0) | int %}
+    {% set extruder = params.EXTRUDER|default(0)|int %}
+
+    M104 S0
+    {% if chambertemp == 0 %}
+        #M106 P3 S255               #(I commented this out to allow for control from the slicer)
+    {% endif %}
+    M140 S{bedtemp}    
+    G28                             #(changed this from CG28)
+    M141 S{chambertemp}    
+    SET_GCODE_OFFSET Z=0 MOVE=0
+    {% if printer.save_variables.variables.box_count >= 1 and printer["box_extras"] %} 
+        SAVE_VARIABLE VARIABLE=load_retry_num VALUE=0
+        SAVE_VARIABLE VARIABLE=retry_step VALUE=None
+        {% for i in range(16) %}
+            SAVE_VARIABLE VARIABLE=runout_{i} VALUE=0
+            G4 P100
+        {% endfor %}
+        {% if printer.save_variables.variables.enable_box == 1 %}
+            BOX_PRINT_START EXTRUDER={extruder} HOTENDTEMP={hotendtemp}
+            M400
+            EXTRUSION_AND_FLUSH HOTEND={hotendtemp}
+        {% endif %}
+    {% endif %}
+
+    CLEAR_NOZZLE HOTEND={hotendtemp} #does the whole purge and wipe thing - (I changed this from NOZZLE_WIPE - it did not exist in my macros)
+    #Cutting and leveling
+    #CUT_FILAMENT_1 #stupid and pointless
+    M104 S150
+    G4 P3000
+    M400
+    G28                             #(changed this from CG28)
+    Z_TILT_ADJUST
+    
+    M104 S150
+    M190 S{bedtemp}   
+    M191 S{chambertemp}
+    M400
+    G4 P3000
+    
+    BED_MESH_CALIBRATE ADAPTIVE=1 PROFILE=ADAPTIVE PROBE_COUNT=7,7 
+    SMART_PARK                      #(I added SMART_PARK, does not seem to be working for me right not for some reason)
+    G0 Z50 F600
+    G0 X260 Y5  F30000
+    {% if printer.save_variables.variables.box_count >= 1 and printer["box_extras"] and printer.save_variables.variables.enable_box == 1 %}
+        BUFFER_MONITORING ENABLE=1 
+    {% endif %}
+    M191 S{chambertemp}
+    M109 S{hotendtemp}
+    M204 S10000
+
+    set_zoffset
+    ENABLE_ALL_SENSOR
+    save_last_file
