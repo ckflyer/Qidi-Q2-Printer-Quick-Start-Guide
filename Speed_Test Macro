@@ -1,0 +1,105 @@
+[gcode_macro SPEED_TEST]
+# Custom speed test macro for QIDI Q2
+# Usage: SPEED_TEST SPEED=300 ACCEL=5000 BOUND=30 ITERATIONS=5
+# This will home, run test pattern, then home again and compare positions
+
+description: Test printer speed and acceleration by running movement patterns
+
+gcode:
+    # ============================================================
+    # PRINTER DIMENSIONS - CHANGE THESE FOR YOUR PRINTER
+    # ============================================================
+    # QIDI Q2 dimensions (X: 0-330, Y: 0-330, Z: 0-330)
+    {% set printer_x_min = 0 %}
+    {% set printer_x_max = 270 %}
+    {% set printer_y_min = 0 %}
+    {% set printer_y_max = 270 %}
+    # ============================================================
+    
+    # Get parameters from command or use defaults
+    {% set speed = params.SPEED|default(600)|int %}
+    {% set accel = params.ACCEL|default(10000)|int %}
+    {% set bound = params.BOUND|default(30)|int %}
+    {% set iterations = params.ITERATIONS|default(5)|int %}
+    
+    # Calculate safe test area with inset
+    {% set x_min = printer_x_min + bound %}
+    {% set x_max = printer_x_max - bound %}
+    {% set y_min = printer_y_min + bound %}
+    {% set y_max = printer_y_max - bound %}
+    
+    # Calculate center point for small pattern
+    {% set x_center = (printer_x_min + printer_x_max) / 2 %}
+    {% set y_center = (printer_y_min + printer_y_max) / 2 %}
+    
+    # Small pattern box size (20mm box around center)
+    {% set small_size = 20 %}
+    {% set x_center_min = x_center - (small_size / 2) %}
+    {% set x_center_max = x_center + (small_size / 2) %}
+    {% set y_center_min = y_center - (small_size / 2) %}
+    {% set y_center_max = y_center + (small_size / 2) %}
+    
+    # Save current state
+    SAVE_GCODE_STATE NAME=SPEED_TEST
+    
+    # Print test parameters
+    { action_respond_info("SPEED_TEST: %d iterations at %d mm/s, %d mm/s² accel, %dmm inset" % (iterations, speed, accel, bound)) }
+    { action_respond_info("Test area: X %.1f-%.1f, Y %.1f-%.1f" % (x_min, x_max, y_min, y_max)) }
+    
+    # Initial home and position check
+    G28
+    M400
+    GET_POSITION
+    
+    # Move to safe starting height
+    G90
+    G0 Z{bound + 10} F3000
+    
+    # Set test speed and acceleration
+    SET_VELOCITY_LIMIT VELOCITY={speed} ACCEL={accel}
+    
+    # Run test pattern
+    {% for i in range(iterations) %}
+        # Large pattern - diagonals
+        G0 X{x_min} Y{y_min} F{speed*60}
+        G0 X{x_max} Y{y_max} F{speed*60}
+        G0 X{x_min} Y{y_min} F{speed*60}
+        G0 X{x_max} Y{y_min} F{speed*60}
+        G0 X{x_min} Y{y_max} F{speed*60}
+        G0 X{x_max} Y{y_min} F{speed*60}
+        
+        # Large pattern - box perimeter
+        G0 X{x_min} Y{y_min} F{speed*60}
+        G0 X{x_min} Y{y_max} F{speed*60}
+        G0 X{x_max} Y{y_max} F{speed*60}
+        G0 X{x_max} Y{y_min} F{speed*60}
+        
+        # Small pattern - diagonals at center
+        G0 X{x_center_min} Y{y_center_min} F{speed*60}
+        G0 X{x_center_max} Y{y_center_max} F{speed*60}
+        G0 X{x_center_min} Y{y_center_min} F{speed*60}
+        G0 X{x_center_max} Y{y_center_min} F{speed*60}
+        G0 X{x_center_min} Y{y_center_max} F{speed*60}
+        G0 X{x_center_max} Y{y_center_min} F{speed*60}
+        
+        # Small pattern - box perimeter at center
+        G0 X{x_center_min} Y{y_center_min} F{speed*60}
+        G0 X{x_center_min} Y{y_center_max} F{speed*60}
+        G0 X{x_center_max} Y{y_center_max} F{speed*60}
+        G0 X{x_center_max} Y{y_center_min} F{speed*60}
+    {% endfor %}
+    
+    # Restore original velocity limits
+    SET_VELOCITY_LIMIT VELOCITY={printer.configfile.settings.printer.max_velocity} ACCEL={printer.configfile.settings.printer.max_accel}
+    
+    # Final home and position check
+    M400
+    G28
+    M400
+    GET_POSITION
+    
+    { action_respond_info("SPEED_TEST: Complete! Compare the two GET_POSITION outputs above.") }
+    { action_respond_info("If MCU positions differ by more than 1 full step, skipping occurred.") }
+    
+    # Restore previous state
+    RESTORE_GCODE_STATE NAME=SPEED_TEST
