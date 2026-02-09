@@ -38,7 +38,7 @@ Thank you to all of you, who are much smarter than I am, for putting together th
 - Do `SAVE_CONFIG` in your Klipper console regularly.
 - Things in this guide are subject to change with new methods and changes made from Qidi themselves. I will do my best to keep it updated as previously mentioned.
 - None of these items are required for others. You can do all, none, or some. They are also in no particular order.
-- This guide is primarily geared towards Qidi Slicer/Studio and Orca Slicer
+- The slicer specifics in this guide are primarily geared towards Qidi Slicer/Studio and Orca Slicer
 - You can add the configs and macros in this guide directly to `printer.cfg` or `gcode_macros.cfg`. If you do this I recommend putting them at the top or bottom in a marked off area so they can easily be found. **HOWEVER**, a better way of doing this is to create your own config file in your printers directory, name is whatever you want (`My_config.cfg`, or something similar), and set your `printer.cfg` to include it with:
   ```
   [include My_Configs.cfg]
