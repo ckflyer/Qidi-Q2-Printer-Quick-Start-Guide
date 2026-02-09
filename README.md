@@ -139,6 +139,8 @@ Before you start here, go into your printer profile > multimaterial > single ext
 
 Again, this post does a better job at explaining than I will. Follow this guide and Orca will work with the Qidi box. Keep in mind there are a couple minor limitations. The biggest being setting filament in Orca does not transfer to Klipper or the printer. This needs to be done through the Klipper dashboard or on the printer itself.
 
+NOTE: Apparently the Qidi box works out of the box with Orca Slicer, with the few limitations listed in the Reddit post below. I have yet to test this.
+
 [https://www.reddit.com/r/QidiTech3D/comments/1pnplo6/qidi_box_with_q2_on_orca_slicer_heres_how_to_get/?sort=new](https://www.reddit.com/r/QidiTech3D/comments/1pnplo6/qidi_box_with_q2_on_orca_slicer_heres_how_to_get/?sort=new)
 
 ## Optional Add-Ons and Extras
