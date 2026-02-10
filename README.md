@@ -125,7 +125,7 @@ My thumbnails were very pixelated when I got my printer. This should fix this is
 
 ### Better Print Start Macro
 
-This print_start macro was built off of [Catsarecool700's QIDI Q2 optimised start macro](https://github.com/Catsarecool700/QIDI-Q2-optimised-start-macro). I made a few minor changes that made it run a little more reliably with my setup. Mine is linked here with annotations in parenthesis on the things I changed.
+This print_start macro was built off of [Catsarecool700's QIDI Q2 optimised start macro](https://github.com/Catsarecool700/QIDI-Q2-optimised-start-macro). I made a few minor changes that made it run a little more reliably with my setup. Mine is linked here with annotations in parenthesis on the things I changed. This does work with the Qidi Box.
 
 ## Essentials for Orca Slicer Users
 
