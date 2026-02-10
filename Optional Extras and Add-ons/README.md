@@ -20,7 +20,7 @@ I hate the stock purge line — I can never get it off the bed cleanly in one go
 
 In your slicer, go to the printer profile settings and find your **Machine Start Gcode**. Replace only the purge line section (not the entire start gcode) with the one found here:
 
-[https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/blob/main/Better%20Purge%20Line](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/blob/main/Better%20Purge%20Line)
+https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/tree/main/Macros%20and%20Configs
 
 > **Note:** Only replace the specific section shown in the file above — do not replace your entire Machine Start Gcode. Alternatively, this could be converted into a Klipper macro.
 
