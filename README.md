@@ -35,6 +35,11 @@ Thank you to all of you, who are much smarter than I am, for putting together th
 
 ---
 
+## Transparency
+All of the README markup language on this Github was created using AI as well as the SPEED_TEST macro. I simply don't have the know-how or patience to create much of this. For some reason, despite me asking it not to, changed some of the wording and formatting between the PDF and these readme files.
+
+---
+
 ## Sources
 
 - [https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/tree/main](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/tree/main)
