@@ -14,7 +14,6 @@ The Q2 is different from previous Qidi generations that used an EMMC module — 
 
 Both can be downloaded from here:
 [https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
-In case that link ever breaks, I have also compiled it [Here](google.com)
 
 ---
 
