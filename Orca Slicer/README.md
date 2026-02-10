@@ -33,7 +33,7 @@ The printer profile gcodes (machine start, filament change, etc.) in Qidi Slicer
 Go into your printer profile > **Multimaterial** > **Single Extruder Multimaterial Parameters** and make these two changes:
 
 - Set **Cooling Tube Position** to `5 mm`
-- Check **Manual Filament Change**
+- Make sure **Manual Filament Change** is checked
 
 The Manual Filament Change option seems counter-intuitive, but it fixes an issue where the print head unnecessarily returns to the purge bucket mid-print as if attempting a filament change, and also eliminates extra movements.
 
