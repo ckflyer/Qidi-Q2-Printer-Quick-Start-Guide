@@ -75,7 +75,7 @@ Source: [bluedrool's Qidi Q2 tuning tweaks and mods](https://github.com/bluedroo
 
 ## Creating Buttons to Filament Change From Klipper
 
-A QOL improvement that gives you Load and Unload buttons right on the Klipper dashboard so you don't have to walk to the printer.
+A QOL improvement that gives you Load and Unload buttons right on the Klipper dashboard so you don't have to walk to the printer. This is really only done if you don't have the Qidi Box or other AMS unit.
 
 1. Go to Klipper settings and click **Macros** in the sidebar.
 2. Click **Add Category** and name it whatever you like (e.g. "Filament Change").
