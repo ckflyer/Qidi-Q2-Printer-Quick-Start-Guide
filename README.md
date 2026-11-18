@@ -53,6 +53,7 @@ Thank you to all of you, who are much smarter than I am, for putting together th
 - **While everything in here should be safe, I am not responsible for what you do to your printer.** I am not a pro. Take everything in here as if it were your 89 year old grandmother writing it.
 - **Back up first.** Before you change anything, back up the config files you will be editing, primarily `printer.cfg` and `gcode_macro.cfg`. It would suck to have to start all over a few times, like I did. See [Back up your config files](#back-up-your-config-files).
 - Run `SAVE_CONFIG` in your Klipper console regularly.
+- **I'm running firmware 1.1.1.** Later versions, while they look cool, kinda suck and are buggy. 1.1.1 is the most recent version I'd consider stable. Most of this guide should work on other versions, but not all of it may. See [Update firmware first](#update-firmware-first).
 - Things in this guide are subject to change with new methods and updates from Qidi. I will do my best to keep it updated.
 - The slicer specifics in this guide are geared towards Qidi Slicer/Studio and Orca Slicer.
 - Anything I didn't come up with myself links to its original source, and everything is collected in [Sources](#sources). A few of those sources include extra guides and mods I haven't tried myself.
@@ -83,7 +84,9 @@ You'll want these if you ever need to [factory reset](#factory-reset-via-usb-c),
 
 ### Update firmware first
 
-Make sure your firmware is up to date before starting this guide. If you update the firmware later on, it will overwrite your changes to the config files. That isn't a huge deal since it creates a backup of them, but it's annoying to go back in and reintegrate everything. Keeping your changes in [your own config file](#create-your-custom-config-file) makes this much easier.
+> **Version note:** I'm running firmware **1.1.1**, and that's what this guide was written on. Later versions, while they look cool, kinda suck and are buggy. 1.1.1 is the most recent version I'd consider stable. Most of this guide should work on other versions, but not all of it may.
+
+Get your firmware to the version you want to stay on before starting this guide. If you update the firmware later on, it will overwrite your changes to the config files. That isn't a huge deal since it creates a backup of them, but it's annoying to go back in and reintegrate everything. Keeping your changes in [your own config file](#create-your-custom-config-file) makes this much easier.
 
 ### Run built-in calibrations and PID tune
 
@@ -234,7 +237,7 @@ Before you get too deep into printing:
 
 ### Orca: Qidi Box integration
 
-> **Firmware note:** I've been told the Qidi Box works with Orca Slicer out of the box if your printer firmware is older than 1.1.0 (with the few limitations listed in the Reddit post below). If you're on 1.1.0 or newer, you'll need to follow this guide. At least that's what I've been told. I haven't tested it yet.
+> **Firmware note:** These steps are what I needed on firmware **1.1.1**. Newer versions may work without this, but I'm not sure. I've also been told the Qidi Box works with Orca Slicer out of the box on firmware older than 1.1.0 (with the few limitations listed in the Reddit post below), but I haven't tested that.
 
 **Before you start**, go into your printer profile > **Multimaterial** > **Single Extruder Multimaterial Parameters** and make these two changes:
 
@@ -247,7 +250,7 @@ Manual Filament Change seems counterintuitive, but it fixed an issue for me wher
 
 [Qidi Box with Q2 on Orca Slicer - here's how to get it working (r/QidiTech3D)](https://www.reddit.com/r/QidiTech3D/comments/1pnplo6/qidi_box_with_q2_on_orca_slicer_heres_how_to_get/?sort=new)
 
-**Known limitations:** The biggest is that setting filament in Orca Slicer does **not** transfer to Klipper or the printer. You need to set it separately through the Klipper dashboard or on the printer screen.
+**Importing filaments from the printer:** On Orca Slicer version 2.5.0 or later, you can import and send the filaments loaded on your printer. Go to **Settings** > **Developer** > **Experimental features** and check **Use printer agents instead of printer hosts**.
 
 ### ORCA_QIDI_BOX macro
 
@@ -333,7 +336,10 @@ This printer isn't like previous Qidi generations that used an EMMC module. On t
 - **RKDevTool**
 - **The factory firmware image** (`.img` file)
 
-You can download RKDevTool and the firmware here: [Qidi Q2 factory firmware and RKDevTool (Google Drive)](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
+You can download RKDevTool and the firmware from either of these:
+
+1. **From this repo:** [Factory firmware and RKDevTool (this repo's Releases)](../../releases/latest). These are the files I downloaded and used.
+2. **From Google Drive:** [Qidi Q2 factory firmware and RKDevTool (Google Drive)](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
 
 **Step 1: Set RKDevTool to English.** It's in Chinese when you first install it. To fix that:
 
