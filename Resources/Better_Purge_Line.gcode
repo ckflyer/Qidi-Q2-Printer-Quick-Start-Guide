@@ -1,4 +1,4 @@
-#Replace this:
+; REPLACE THIS section of your Machine Start Gcode (leave the rest alone):
 
 G1 X108 Y1 F30000
 G0 Z[initial_layer_print_height] F600
@@ -22,7 +22,7 @@ G0 X153 E.3742 F{outer_wall_volumetric_speed/(0.3*0.5)/4 * 60}
 G1 X154 Z-0.1
 G1 X158
 
-With this:
+; WITH THIS:
 
 G1 X108 Y1 F15000
 G0 Z[initial_layer_print_height] F600
