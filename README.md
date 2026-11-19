@@ -351,6 +351,11 @@ It homes (if needed), runs X and Y back and forth across their full travel and d
 
 THIS IS UNTESTED BE CAREFUL!!!!!!
 
+### Cleaning your nozzle
+
+This took me way to long to figure out, so figured I'd throw it in here.
+You can use an old cotton rag to clean oozing filament off your nozzle. It works amazingly. I use old socks or cut up T-shirt. Just make sure it 100% cotton. I like socks because they're usually thicker and aren't as easy to burn yourself with.
+
 ### Spoolman with the Qidi Box (q2-spoolbridge)
 
 [q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge) by Warre118 connects the Qidi Box to [Spoolman](https://github.com/Donkie/Spoolman) and keeps track of how much filament is left on each spool. You assign a spool to each Box slot in Fluidd, and it automatically switches the active spool to whatever slot the Box has loaded. It also corrects the usage counts that Moonraker gets wrong during tool changes and purges. This is built for version 01.01.03.x, so I haven't personally tested it, but looks like a pretty cool project.
