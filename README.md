@@ -410,7 +410,7 @@ You can download RKDevTool and the firmware from either of these:
 4. Press **Switch** and let it run.
 5. Press **Upgrade**.
 
-> Honestly, I'm not 100% sure of the exact steps after going to Upgrade Firmware. The program is a little weird, and this is my best recollection of what worked. If you run into trouble, check the [Qidi community](https://github.com/qidi-community) for more detailed walkthroughs.
+> Honestly, I'm not 100% sure of the exact steps after going to Upgrade Firmware. The program is a little weird, and this is my best recollection of what worked. If you run into trouble, check the [Qidi community](https://github.com/qidi-community) for more detailed walkthroughs. I also have the "translated" instructions from Qidi in the recovery folder.
 
 ---
 
