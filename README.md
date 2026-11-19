@@ -72,7 +72,7 @@ Any macro or code file mentioned in the guide lives in the [Resources](Resources
 
 ## Transparency
 
-All of the README markdown in this repository was created using AI, as was the SPEED_TEST macro. I fully wrote the original PDF guide, but I simply don't have the know-how or patience to code these readme files. Despite me asking it not to, the AI changed some of the wording and formatting between the PDF and the readme. This version of the README was also reorganized and rewritten with AI, using my original guide as the source.
+All of the README markdown in this repository was created using AI, as was the SPEED_TEST macro, and LUBE_IT macro. I fully wrote the original PDF guide, but I simply don't have the know-how or patience to code these readme files. Despite me asking it not to, the AI changed some of the wording and formatting between the PDF and the readme. This version of the README was also reorganized and rewritten with AI, using my original guide as the source.
 
 ---
 
