@@ -364,7 +364,7 @@ THIS IS UNTESTED BE CAREFUL!!!!!!
 
 ---
 
-## 6. Recovery
+## 6. Recovery and Downgrading Firmware
 
 ### Factory reset via USB-C
 
@@ -411,6 +411,15 @@ You can download RKDevTool and the firmware from either of these:
 5. Press **Upgrade**.
 
 > Honestly, I'm not 100% sure of the exact steps after going to Upgrade Firmware. The program is a little weird, and this is my best recollection of what worked. If you run into trouble, check the [Qidi community](https://github.com/qidi-community) for more detailed walkthroughs. I also have the "translated" instructions from Qidi in the recovery folder.
+>
+> ###Downgrading Firmware to v1.1.1
+
+You will need to accomplish the steps above in recovery. If you've done that, you're most of the way there.
+1. If you are able, go in and backup any config files you don't want to loose before starting
+1. Download the folder "QD_Update" (not the contents, the whole folder). This will update you to v1.1.1
+2. Extract the QD_Update zip and drop it into the root of a USB stick. It should be formatted to FAT32 and at least 8gb
+3. Plug in the USB to your printer, power on, and go to offline update and update
+4. You will need to rerun all your calibrations and reconfigure your config files
 
 ---
 
