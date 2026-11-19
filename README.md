@@ -416,7 +416,7 @@ You can download RKDevTool and the firmware from either of these:
 
 You will need to accomplish the steps above in recovery. If you've done that, you're most of the way there.
 1. If you are able, go in and backup any config files you don't want to loose before starting
-1. Download the folder "QD_Update" (not the contents, the whole folder). This will update you to v1.1.1
+1. Download the folder "QD_Update" from here (not the contents, the whole folder). This will update you to v1.1.1
 2. Extract the QD_Update zip and drop it into the root of a USB stick. It should be formatted to FAT32 and at least 8gb
 3. Plug in the USB to your printer, power on, and go to offline update and update
 4. You will need to rerun all your calibrations and reconfigure your config files
