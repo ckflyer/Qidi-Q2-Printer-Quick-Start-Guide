@@ -33,8 +33,9 @@ A quick start guide to QOL improvements and integrations for the Qidi Q2.
   - [Spoolman with the Qidi Box (q2-spoolbridge)](#spoolman-with-the-qidi-box-q2-spoolbridge)
   - [Ellis print tuning guide](#ellis-print-tuning-guide)
   - [bluedrool tuning tweaks and mods](#bluedrool-tuning-tweaks-and-mods)
-- [6. Recovery](#6-recovery)
+- [6. Recovery and Downgrading Firmware](#6-recovery-and-downgrading-firmware)
   - [Factory reset via USB-C](#factory-reset-via-usb-c)
+  - [Downgrading firmware to v1.1.1](#downgrading-firmware-to-v111)
 - [7. Reference](#7-reference)
   - [Macro and config files](#macro-and-config-files)
   - [Sources](#sources)
@@ -55,7 +56,7 @@ Thank you to all of you, who are much smarter than I am, for putting together th
 - **While everything in here should be safe, I am not responsible for what you do to your printer.** I am not a pro. Take everything in here as if it were your 89 year old grandmother writing it.
 - **Back up first.** Before you change anything, back up the config files you will be editing, primarily `printer.cfg` and `gcode_macro.cfg`. It would suck to have to start all over a few times, like I did. See [Back up your config files](#back-up-your-config-files).
 - Run `SAVE_CONFIG` in your Klipper console regularly.
-- **I'm running firmware 1.1.1.** Later versions, while they look cool, kinda suck and are buggy. 1.1.1 is the most recent version I'd consider stable. Most of this guide should work on other versions, but not all of it may. See [Update firmware first](#update-firmware-first).
+- **I'm running firmware 1.1.1.** Later versions, while they look cool, kinda suck and are buggy. 1.1.1 is the most recent version I'd consider stable. Most of this guide should work on other versions, but not all of it may. See [Update firmware first](#update-firmware-first), or [Downgrading firmware to v1.1.1](#downgrading-firmware-to-v111) if you're already on something newer.
 - Things in this guide are subject to change with new methods and updates from Qidi. I will do my best to keep it updated.
 - The slicer specifics in this guide are geared towards Qidi Slicer/Studio and Orca Slicer.
 - Anything I didn't come up with myself links to its original source, and everything is collected in [Sources](#sources). A few of those sources include extra guides and mods I haven't tried myself.
@@ -86,7 +87,7 @@ You'll want these if you ever need to [factory reset](#factory-reset-via-usb-c),
 
 ### Update firmware first
 
-> **Version note:** I'm running firmware **1.1.1**, and that's what this guide was written on. Later versions, while they look cool, kinda suck and are buggy. 1.1.1 is the most recent version I'd consider stable. Most of this guide should work on other versions, but not all of it may.
+> **Version note:** I'm running firmware **1.1.1**, and that's what this guide was written on. Later versions, while they look cool, kinda suck and are buggy. 1.1.1 is the most recent version I'd consider stable. Most of this guide should work on other versions, but not all of it may. Already on a newer version? See [Downgrading firmware to v1.1.1](#downgrading-firmware-to-v111).
 
 Get your firmware to the version you want to stay on before starting this guide. If you update the firmware later on, it will overwrite your changes to the config files. That isn't a huge deal since it creates a backup of them, but it's annoying to go back in and reintegrate everything. Keeping your changes in [your own config file](#create-your-custom-config-file) makes this much easier.
 
@@ -410,16 +411,17 @@ You can download RKDevTool and the firmware from either of these:
 4. Press **Switch** and let it run.
 5. Press **Upgrade**.
 
-> Honestly, I'm not 100% sure of the exact steps after going to Upgrade Firmware. The program is a little weird, and this is my best recollection of what worked. If you run into trouble, check the [Qidi community](https://github.com/qidi-community) for more detailed walkthroughs. I also have the "translated" instructions from Qidi in the recovery folder.
->
-> ###Downgrading Firmware to v1.1.1
+> Honestly, I'm not 100% sure of the exact steps after going to Upgrade Firmware. The program is a little weird, and this is my best recollection of what worked. If you run into trouble, check the [Qidi community](https://github.com/qidi-community) for more detailed walkthroughs. I also have the "translated" instructions from Qidi in the Recovery folder: [re-flash emmc English version.docx](<Resources/Recovery/re-flash emmc English version.docx>).
 
-You will need to accomplish the steps above in recovery. If you've done that, you're most of the way there.
-1. If you are able, go in and backup any config files you don't want to loose before starting
-1. Download the folder "QD_Update" from here (not the contents, the whole folder). This will update you to v1.1.1
-2. Extract the QD_Update zip and drop it into the root of a USB stick. It should be formatted to FAT32 and at least 8gb
-3. Plug in the USB to your printer, power on, and go to offline update and update
-4. You will need to rerun all your calibrations and reconfigure your config files
+### Downgrading firmware to v1.1.1
+
+You'll need to do the [factory reset steps above](#factory-reset-via-usb-c) first. If you've done that, you're most of the way there.
+
+1. If you're able to, [back up](#back-up-your-config-files) any config files you don't want to lose before starting.
+2. Download the `QD_Update` zip from this [repo's Releases](../../releases/latest). This will update you to v1.1.1.
+3. Extract the zip and drop the whole `QD_Update` folder (not just its contents) into the root of a USB stick. The stick should be formatted to FAT32 and at least 8GB.
+4. Plug the USB stick into your printer, power on, go to **Offline Update** and run the update.
+5. You'll need to rerun all your calibrations and set up your config files again.
 
 ---
 
@@ -437,6 +439,8 @@ Everything lives in the [Resources](Resources) folder:
 | [ORCA_QIDI_BOX.cfg](Resources/ORCA_QIDI_BOX.cfg) | Macro for using the Qidi Box with Orca Slicer | [ORCA_QIDI_BOX macro](#orca_qidi_box-macro) |
 | [SPEED_TEST.cfg](Resources/SPEED_TEST.cfg) | Acceleration and motor current test macro | [Acceleration speed test macro](#acceleration-speed-test-macro) |
 | [LUBE_IT.cfg](Resources/LUBE_IT.cfg) | Spreads lube along the rods and leadscrews | [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws) |
+| [re-flash emmc English version.docx](<Resources/Recovery/re-flash emmc English version.docx>) | Qidi's translated re-flash instructions | [Factory reset via USB-C](#factory-reset-via-usb-c) |
+| [Firmware files (Releases)](../../releases/latest) | Recovery image, RKDevTool, and the v1.1.1 `QD_Update` zip | [Factory reset via USB-C](#factory-reset-via-usb-c), [Downgrading firmware to v1.1.1](#downgrading-firmware-to-v111) |
 | [Original PDF guide](<Resources/Qidi Q2 Printer Quick Start Guide (original).pdf>) | The first version of this guide | [PDF version](#pdf-version) |
 
 ### Sources
