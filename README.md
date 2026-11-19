@@ -30,6 +30,7 @@ A quick start guide to QOL improvements and integrations for the Qidi Q2.
 - [5. Advanced Tuning, Extras, and Tips](#5-advanced-tuning-extras-and-tips)
   - [Acceleration speed test macro](#acceleration-speed-test-macro)
   - [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws)
+  - [Cleaning your nozzle](#cleaning-your-nozzle)
   - [Spoolman with the Qidi Box (q2-spoolbridge)](#spoolman-with-the-qidi-box-q2-spoolbridge)
   - [Ellis print tuning guide](#ellis-print-tuning-guide)
   - [bluedrool tuning tweaks and mods](#bluedrool-tuning-tweaks-and-mods)
@@ -353,8 +354,9 @@ THIS IS UNTESTED BE CAREFUL!!!!!!
 
 ### Cleaning your nozzle
 
-This took me way to long to figure out, so figured I'd throw it in here.
-You can use an old cotton rag to clean oozing filament off your nozzle. It works amazingly. I use old socks or cut up T-shirt. Just make sure it 100% cotton. I like socks because they're usually thicker and aren't as easy to burn yourself with.
+This took me way too long to figure out, so I figured I'd throw it in here.
+
+You can use an old cotton rag to clean oozing filament off your nozzle. It works amazingly. I use old socks or a cut-up T-shirt. Just make sure it's **100% cotton**. I like socks because they're usually thicker, so it's harder to burn yourself through them.
 
 ### Spoolman with the Qidi Box (q2-spoolbridge)
 
