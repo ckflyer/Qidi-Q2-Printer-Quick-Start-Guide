@@ -338,21 +338,20 @@ Use the [Rod Sloth](https://www.printables.com/model/605305-rod-sloth-fits-most-
 
 #### Spreading the lube
 
-**File:** [Resources/LUBE_SPREAD.cfg](Resources/LUBE_SPREAD.cfg)
+**File:** [Resources/LUBE_IT.cfg](Resources/LUBE_IT.cfg)
 
-Once your screws and rods have been lubed, you can add this macro to your custom config file and run it to spread the lube. Clear the bed first, then run this in the Klipper console:
+Once your screws and rods have been lubed, you can add this macro to your custom config file and run it to spread the lube. Clear the bed (above and below) first, then run this in the Klipper console:
 
 ```
-LUBE_SPREAD
+LUBE_IT
 ```
 
-It homes (if needed), runs X and Y back and forth across their full travel and diagonally, then runs the bed up and down the full length of the leadscrews. It does 5 passes by default and stays 20mm away from the edges. You can change that, for example `LUBE_SPREAD PASSES=10`. The other options are listed at the top of the file. When it's done, wipe off any excess lube that collected at the ends of the rods and screws.
+It homes (if needed), runs X and Y back and forth across their full travel and diagonally, then runs the bed up and down the full length of the leadscrews. It does 5 passes by default and stays 20mm away from the edges. You can change that with `LUBE_IT PASSES=10` in the console. The other options are listed at the top of the file.
+THIS IS UNTESTED BE CAREFUL!!!!!!
 
 ### Spoolman with the Qidi Box (q2-spoolbridge)
 
-[q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge) by Warre118 connects the Qidi Box to [Spoolman](https://github.com/Donkie/Spoolman), so you can keep track of how much filament is left on each spool. You assign a spool to each Box slot in Fluidd, and it automatically switches the active spool to whatever slot the Box has loaded. It also corrects the usage counts that Moonraker gets wrong during tool changes and purges. It only watches the printer and doesn't override any of Qidi's macros, so it shouldn't knock the Box out of sync.
-
-> **Heads up:** It's in beta and is built for firmware **01.01.03.x**, which is newer than the 1.1.1 I run, so I haven't tried it myself. You'll also need Spoolman already set up and working in Fluidd. Install steps are in its README.
+[q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge) by Warre118 connects the Qidi Box to [Spoolman](https://github.com/Donkie/Spoolman)and keeps track of how much filament is left on each spool. You assign a spool to each Box slot in Fluidd, and it automatically switches the active spool to whatever slot the Box has loaded. It also corrects the usage counts that Moonraker gets wrong during tool changes and purges. This is built for version 01.01.03.x, so I haven't personally tested it, but looks like a pretty cool project.
 
 ### Ellis print tuning guide
 
