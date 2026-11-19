@@ -30,6 +30,7 @@ A quick start guide to QOL improvements and integrations for the Qidi Q2.
 - [5. Advanced Tuning, Extras, and Tips](#5-advanced-tuning-extras-and-tips)
   - [Acceleration speed test macro](#acceleration-speed-test-macro)
   - [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws)
+  - [Spoolman with the Qidi Box (q2-spoolbridge)](#spoolman-with-the-qidi-box-q2-spoolbridge)
   - [Ellis print tuning guide](#ellis-print-tuning-guide)
   - [bluedrool tuning tweaks and mods](#bluedrool-tuning-tweaks-and-mods)
 - [6. Recovery](#6-recovery)
@@ -347,6 +348,12 @@ LUBE_SPREAD
 
 It homes (if needed), runs X and Y back and forth across their full travel and diagonally, then runs the bed up and down the full length of the leadscrews. It does 5 passes by default and stays 20mm away from the edges. You can change that, for example `LUBE_SPREAD PASSES=10`. The other options are listed at the top of the file. When it's done, wipe off any excess lube that collected at the ends of the rods and screws.
 
+### Spoolman with the Qidi Box (q2-spoolbridge)
+
+[q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge) by Warre118 connects the Qidi Box to [Spoolman](https://github.com/Donkie/Spoolman), so you can keep track of how much filament is left on each spool. You assign a spool to each Box slot in Fluidd, and it automatically switches the active spool to whatever slot the Box has loaded. It also corrects the usage counts that Moonraker gets wrong during tool changes and purges. It only watches the printer and doesn't override any of Qidi's macros, so it shouldn't knock the Box out of sync.
+
+> **Heads up:** It's in beta and is built for firmware **01.01.03.x**, which is newer than the 1.1.1 I run, so I haven't tried it myself. You'll also need Spoolman already set up and working in Fluidd. Install steps are in its README.
+
 ### Ellis print tuning guide
 
 [Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/) is the go-to reference for dialing in your prints. The motor current article linked above comes from here.
@@ -434,6 +441,7 @@ Everything lives in the [Resources](Resources) folder:
 - [Mobileraker](https://github.com/Clon1998/mobileraker) and [Mobileraker Companion](https://github.com/Clon1998/mobileraker_companion)
 - [Qidi community on GitHub](https://github.com/qidi-community)
 - [Rod Sloth (Printables)](https://www.printables.com/model/605305-rod-sloth-fits-most-3d-printers-prusa-bambu-creali)
+- [Warre118: q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge)
 - [Qidi Q2 factory firmware and RKDevTool (Google Drive)](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
 - [This guide on GitHub](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide)
 
