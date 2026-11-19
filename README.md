@@ -378,10 +378,14 @@ This printer isn't like previous Qidi generations that used an EMMC module. On t
 - A USB-C cable
 - **RKDevTool**
 - **The factory firmware image** (`.img` file)
+- [7-Zip](https://www.7-zip.org/) (free) to extract the downloads
 
 You can download RKDevTool and the firmware from either of these:
 
-1. **From this repo:** [Factory firmware and RKDevTool (this repo's Releases)](../../releases/latest). These are the files I downloaded and used.
+1. **From this repo:** download [Recovery.7z](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/releases/download/Recovery/Recovery.7z) (about 1.9 GB) from the [Update and Recovery release](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/releases/tag/Recovery). These are the files I downloaded and used. It contains:
+   - `KLP_IMG_QD_Q2_V1.0.1_20250505_Release.7z`: the factory firmware (v1.0.1). It's another archive, so extract it too to get the `.img` file.
+   - `RKDevTool_v3.19_for_window.rar`: RKDevTool for Windows.
+   - `re-flash emmc English version.docx`: Qidi's translated instructions.
 2. **From Google Drive:** [Qidi Q2 factory firmware and RKDevTool (Google Drive)](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
 
 **Step 1: Set RKDevTool to English.** It's in Chinese when you first install it. To fix that:
@@ -418,10 +422,11 @@ You can download RKDevTool and the firmware from either of these:
 You'll need to do the [factory reset steps above](#factory-reset-via-usb-c) first. If you've done that, you're most of the way there.
 
 1. If you're able to, [back up](#back-up-your-config-files) any config files you don't want to lose before starting.
-2. Download the `QD_Update` zip from this [repo's Releases](../../releases/latest). This will update you to v1.1.1.
-3. Extract the zip and drop the whole `QD_Update` folder (not just its contents) into the root of a USB stick. The stick should be formatted to FAT32 and at least 8GB.
-4. Plug the USB stick into your printer, power on, go to **Offline Update** and run the update.
-5. You'll need to rerun all your calibrations and set up your config files again.
+2. Download [QD_Update.7z](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/releases/download/Recovery/QD_Update.7z) from the [Update and Recovery release](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/releases/tag/Recovery). This will update you to v1.1.1.
+3. Right-click the file and choose **7-Zip** > **Extract to "QD_Update\"**. This creates a `QD_Update` folder with three files in it (`QD_Q2_MCU`, `QD_Q2_SOC_V1.1.1_20260109_Release`, and `QD_Q2_THR`).
+4. Copy the whole `QD_Update` folder (not just the files inside it) to the root of a USB stick. The stick should be formatted to FAT32 and at least 8GB.
+5. Plug the USB stick into your printer, power on, go to **Offline Update** and run the update.
+6. You'll need to rerun all your calibrations and set up your config files again.
 
 ---
 
@@ -440,7 +445,7 @@ Everything lives in the [Resources](Resources) folder:
 | [SPEED_TEST.cfg](Resources/SPEED_TEST.cfg) | Acceleration and motor current test macro | [Acceleration speed test macro](#acceleration-speed-test-macro) |
 | [LUBE_IT.cfg](Resources/LUBE_IT.cfg) | Spreads lube along the rods and leadscrews | [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws) |
 | [re-flash emmc English version.docx](<Resources/Recovery/re-flash emmc English version.docx>) | Qidi's translated re-flash instructions | [Factory reset via USB-C](#factory-reset-via-usb-c) |
-| [Firmware files (Releases)](../../releases/latest) | Recovery image, RKDevTool, and the v1.1.1 `QD_Update` zip | [Factory reset via USB-C](#factory-reset-via-usb-c), [Downgrading firmware to v1.1.1](#downgrading-firmware-to-v111) |
+| [Update and Recovery release](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide/releases/tag/Recovery) | `Recovery.7z` (factory image, RKDevTool, re-flash docx) and `QD_Update.7z` (v1.1.1 update) | [Factory reset via USB-C](#factory-reset-via-usb-c), [Downgrading firmware to v1.1.1](#downgrading-firmware-to-v111) |
 | [Original PDF guide](<Resources/Qidi Q2 Printer Quick Start Guide (original).pdf>) | The first version of this guide | [PDF version](#pdf-version) |
 
 ### Sources
