@@ -27,8 +27,9 @@ A quick start guide to QOL improvements and integrations for the Qidi Q2.
 - [4. Remote Monitoring](#4-remote-monitoring)
   - [Install Octoeverywhere](#install-octoeverywhere)
   - [Mobileraker phone app](#mobileraker-phone-app)
-- [5. Advanced Tuning and Extras](#5-advanced-tuning-and-extras)
+- [5. Advanced Tuning, Extras, and Tips](#5-advanced-tuning-extras-and-tips)
   - [Acceleration speed test macro](#acceleration-speed-test-macro)
+  - [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws)
   - [Ellis print tuning guide](#ellis-print-tuning-guide)
   - [bluedrool tuning tweaks and mods](#bluedrool-tuning-tweaks-and-mods)
 - [6. Recovery](#6-recovery)
@@ -332,9 +333,19 @@ Use a clean cloth to wipe down the rods. Apply a small amount of Super Lube (I'v
 
 #### Leadscrews
 
-Use the Rod Sloth (https://www.printables.com/model/605305-rod-sloth-fits-most-3d-printers-prusa-bambu-creali) to clean out the screws with a thin rag and some IPA. Raise or lower your bed all the way and apply the grease that came with the printer, or white lithium grease.
+Use the [Rod Sloth](https://www.printables.com/model/605305-rod-sloth-fits-most-3d-printers-prusa-bambu-creali) to clean out the screws with a thin rag and some IPA. Raise or lower your bed all the way and apply the grease that came with the printer, or white lithium grease.
 
-Once your screws and rods have been lubed you can add and run this gcode macro to spread the lube.
+#### Spreading the lube
+
+**File:** [Resources/LUBE_SPREAD.cfg](Resources/LUBE_SPREAD.cfg)
+
+Once your screws and rods have been lubed, you can add this macro to your custom config file and run it to spread the lube. Clear the bed first, then run this in the Klipper console:
+
+```
+LUBE_SPREAD
+```
+
+It homes (if needed), runs X and Y back and forth across their full travel and diagonally, then runs the bed up and down the full length of the leadscrews. It does 5 passes by default and stays 20mm away from the edges. You can change that, for example `LUBE_SPREAD PASSES=10`. The other options are listed at the top of the file. When it's done, wipe off any excess lube that collected at the ends of the rods and screws.
 
 ### Ellis print tuning guide
 
@@ -409,6 +420,7 @@ Everything lives in the [Resources](Resources) folder:
 | [Better_Purge_Line.gcode](Resources/Better_Purge_Line.gcode) | Replacement purge line for your slicer's start gcode | [Better purge line](#better-purge-line) |
 | [ORCA_QIDI_BOX.cfg](Resources/ORCA_QIDI_BOX.cfg) | Macro for using the Qidi Box with Orca Slicer | [ORCA_QIDI_BOX macro](#orca_qidi_box-macro) |
 | [SPEED_TEST.cfg](Resources/SPEED_TEST.cfg) | Acceleration and motor current test macro | [Acceleration speed test macro](#acceleration-speed-test-macro) |
+| [LUBE_SPREAD.cfg](Resources/LUBE_SPREAD.cfg) | Spreads lube along the rods and leadscrews | [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws) |
 | [Original PDF guide](<Resources/Qidi Q2 Printer Quick Start Guide (original).pdf>) | The first version of this guide | [PDF version](#pdf-version) |
 
 ### Sources
@@ -421,6 +433,7 @@ Everything lives in the [Resources](Resources) folder:
 - [Qidi Wiki: Octoeverywhere](https://wiki.qidi3d.com/en/Memo/octoeverywhere)
 - [Mobileraker](https://github.com/Clon1998/mobileraker) and [Mobileraker Companion](https://github.com/Clon1998/mobileraker_companion)
 - [Qidi community on GitHub](https://github.com/qidi-community)
+- [Rod Sloth (Printables)](https://www.printables.com/model/605305-rod-sloth-fits-most-3d-printers-prusa-bambu-creali)
 - [Qidi Q2 factory firmware and RKDevTool (Google Drive)](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
 - [This guide on GitHub](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide)
 
