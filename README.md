@@ -8,26 +8,26 @@ A quick start guide to QOL improvements and integrations for the Qidi Q2.
 - [Disclaimer and quick notes](#disclaimer-and-quick-notes)
 - [How to use this guide](#how-to-use-this-guide)
 - [Transparency](#transparency)
-- [1. Before you start](#1-before-you-start)
+- [1. Before You Start](#1-before-you-start)
   - [Back up your config files](#back-up-your-config-files)
   - [Update firmware first](#update-firmware-first)
   - [Run built-in calibrations and PID tune](#run-built-in-calibrations-and-pid-tune)
   - [Create your custom config file](#create-your-custom-config-file)
-- [2. Klipper and Fluidd setup](#2-klipper-and-fluidd-setup)
+- [2. Klipper and Fluidd Setup](#2-klipper-and-fluidd-setup)
   - [Show toolhead and host CPU temps](#show-toolhead-and-host-cpu-temps)
   - [Load and unload filament buttons](#load-and-unload-filament-buttons)
   - [Better PRINT_START macro](#better-print_start-macro)
   - [KAMP adaptive bed mesh](#kamp-adaptive-bed-mesh)
   - [Control circulation fan from slicer](#control-circulation-fan-from-slicer)
-- [3. Slicer setup](#3-slicer-setup)
+- [3. Slicer Setup](#3-slicer-setup)
   - [Sharp Gcode thumbnails](#sharp-gcode-thumbnails)
   - [Better purge line](#better-purge-line)
-  - [Orca: copy Qidi Slicer machine gcodes](#orca-copy-qidi-slicer-machine-gcodes)
   - [Orca: Qidi Box integration](#orca-qidi-box-integration)
   - [ORCA_QIDI_BOX macro](#orca_qidi_box-macro)
-- [4. Remote monitoring](#4-remote-monitoring)
+- [4. Remote Monitoring](#4-remote-monitoring)
   - [Install Octoeverywhere](#install-octoeverywhere)
-- [5. Tuning and advanced](#5-tuning-and-advanced)
+  - [Mobileraker phone app](#mobileraker-phone-app)
+- [5. Advanced Tuning and Extras](#5-advanced-tuning-and-extras)
   - [Acceleration speed test macro](#acceleration-speed-test-macro)
   - [Ellis print tuning guide](#ellis-print-tuning-guide)
   - [bluedrool tuning tweaks and mods](#bluedrool-tuning-tweaks-and-mods)
@@ -72,7 +72,7 @@ All of the README markdown in this repository was created using AI, as was the S
 
 ---
 
-## 1. Before you start
+## 1. Before You Start
 
 ### Back up your config files
 
@@ -124,7 +124,7 @@ A starter version of this file is in [Resources/My_Configs.cfg](Resources/My_Con
 
 ---
 
-## 2. Klipper and Fluidd setup
+## 2. Klipper and Fluidd Setup
 
 ### Show toolhead and host CPU temps
 
@@ -200,7 +200,7 @@ This may have just been a me issue. I haven't heard or seen others having it, bu
 
 ---
 
-## 3. Slicer setup
+## 3. Slicer Setup
 
 ### Sharp Gcode thumbnails
 
@@ -222,20 +222,9 @@ In your slicer, go to the printer profile settings and find your **Machine Start
 
 > **Note:** Do not replace the entire Machine Start Gcode, only the section shown in the file. Alternatively, you could probably turn this into a Klipper macro.
 
-### Orca: copy Qidi Slicer machine gcodes
+### Orca: Qidi Box integration
 
 *If you only use Qidi Slicer, you can skip the Orca items.*
-
-The printer profile gcodes (machine start, filament change, etc.) in Qidi Slicer seem to be more up to date than the ones bundled with Orca Slicer. I have no evidence that they're newer other than the fact that they seem to work better. I was having extruder jamming issues with the Orca filament change gcode, and it all went away once I swapped in the Qidi Slicer gcode.
-
-Before you get too deep into printing:
-
-1. Download Qidi Slicer if you don't already have it.
-2. Open your printer profile in Qidi Slicer and copy the machine start gcode, filament change gcode, and any other profile gcodes.
-3. Paste them into the matching fields in your Orca Slicer printer profile.
-4. Check back in Qidi Slicer occasionally to see if they've changed.
-
-### Orca: Qidi Box integration
 
 > **Firmware note:** These steps are what I needed on firmware **1.1.1**. Newer versions may work without this, but I'm not sure. I've also been told the Qidi Box works with Orca Slicer out of the box on firmware older than 1.1.0 (with the few limitations listed in the Reddit post below), but I haven't tested that.
 
@@ -269,7 +258,7 @@ Tools `T0` to `T3` map to Box slots 1A to 1D. If more boxes are connected, the e
 
 ---
 
-## 4. Remote monitoring
+## 4. Remote Monitoring
 
 ### Install Octoeverywhere
 
@@ -294,9 +283,32 @@ I'm not a fan of the Qidi mobile app. In case you don't know, the Octoeverywhere
 
 Qidi's official guide: [wiki.qidi3d.com/en/Memo/octoeverywhere](https://wiki.qidi3d.com/en/Memo/octoeverywhere)
 
+### Mobileraker phone app
+
+Mobileraker is a free phone app (iOS and Android) that works as a Klipper dashboard on your phone. You can see temps and progress, pause, resume or stop a print, run macros, and watch the camera. It's a lot nicer than the Qidi app.
+
+1. Install **Mobileraker** from the App Store or Google Play.
+2. Open the app and tap **Add Machine**, then **Simple**.
+3. Enter your printer's IP address (the same one you used for [Octoeverywhere](#install-octoeverywhere)) and save.
+
+That gets you control on your home network.
+
+**Remote access:** If you've set up [Octoeverywhere](#install-octoeverywhere), Mobileraker can connect through it, so you can use the app away from home too. Look for the remote connection options in the printer's settings in the app.
+
+**Push notifications** (print done, progress, errors) need a small add-on called Mobileraker Companion installed on the printer. SSH in the same way as the [Octoeverywhere steps](#install-octoeverywhere) and run:
+
+```bash
+git clone https://github.com/Clon1998/mobileraker_companion.git
+./mobileraker_companion/scripts/install.sh
+```
+
+Then allow notifications in the app under **App Settings**.
+
+More info: [Mobileraker](https://github.com/Clon1998/mobileraker) and [Mobileraker Companion](https://github.com/Clon1998/mobileraker_companion)
+
 ---
 
-## 5. Tuning and advanced
+## 5. Advanced Tuning and Extras
 
 ### Acceleration speed test macro
 
@@ -395,10 +407,11 @@ Everything lives in the [Resources](Resources) folder:
 - [r/QidiTech3D: Qidi Box with Q2 on Orca Slicer](https://www.reddit.com/r/QidiTech3D/comments/1pnplo6/qidi_box_with_q2_on_orca_slicer_heres_how_to_get/?sort=new)
 - [Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/) ([Determining motor currents](https://ellis3dp.com/Print-Tuning-Guide/articles/determining_motor_currents.html))
 - [Qidi Wiki: Octoeverywhere](https://wiki.qidi3d.com/en/Memo/octoeverywhere)
+- [Mobileraker](https://github.com/Clon1998/mobileraker) and [Mobileraker Companion](https://github.com/Clon1998/mobileraker_companion)
 - [Qidi community on GitHub](https://github.com/qidi-community)
 - [Qidi Q2 factory firmware and RKDevTool (Google Drive)](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
 - [This guide on GitHub](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide)
 
 ### PDF version
 
-The [original PDF guide](<Resources/Qidi Q2 Printer Quick Start Guide (original).pdf>) is kept for reference, but it's the older version. This README is the current one. Once the layout is final, the PDF can be regenerated from this page so the two match again.
+The [original PDF guide](<Resources/Qidi Q2 Printer Quick Start Guide (original).pdf>) is kept for reference, but it's the older version. This README is the current one.
