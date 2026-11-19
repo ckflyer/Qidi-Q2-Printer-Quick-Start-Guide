@@ -19,6 +19,7 @@ A quick start guide to QOL improvements and integrations for the Qidi Q2.
   - [Better PRINT_START macro](#better-print_start-macro)
   - [KAMP adaptive bed mesh](#kamp-adaptive-bed-mesh)
   - [Control circulation fan from slicer](#control-circulation-fan-from-slicer)
+  - [Qidi Q2 Superuser (all-in-one installer)](#qidi-q2-superuser-all-in-one-installer)
 - [3. Slicer Setup](#3-slicer-setup)
   - [Sharp Gcode thumbnails](#sharp-gcode-thumbnails)
   - [Better purge line](#better-purge-line)
@@ -201,6 +202,12 @@ If you're using the stock macro:
 4. You can now control the circulation fan in your filament profile under **Cooling** > **Exhaust Fan**.
 
 This may have just been a me issue. I haven't heard or seen others having it, but if you do, this is your fix.
+
+### Qidi Q2 Superuser (all-in-one installer)
+
+[Qidi Q2 Superuser](https://github.com/Camden-Winder/Qidi-Q2-superuser) by Camden-Winder is an all-in-one installer that sets up a bunch of upgrades from a single SSH command, without hand-editing config files. It includes faster `PRINT_START` and `PRINT_END` macros, KAMP adaptive bed meshing, Happy Hare MMU firmware and the HelixScreen touchscreen UI for the Qidi Box, and an optional Mainsail web UI. It also turns off unused processes so the system runs better. Every install makes a timestamped backup that you can revert to from the menu.
+
+It looks really interesting, but I have yet to try it myself. It covers some of the same ground as this section (like `PRINT_START` and KAMP), so you'd probably use it instead of those steps rather than alongside them. Check out his [install guide](https://github.com/Camden-Winder/Qidi-Q2-superuser/wiki/Q2-Install-Guide).
 
 ---
 
@@ -467,6 +474,7 @@ Everything lives in the [Resources](Resources) folder:
 - [Qidi community on GitHub](https://github.com/qidi-community)
 - [Rod Sloth (Printables)](https://www.printables.com/model/605305-rod-sloth-fits-most-3d-printers-prusa-bambu-creali)
 - [Warre118: q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge)
+- [Camden-Winder: Qidi Q2 Superuser](https://github.com/Camden-Winder/Qidi-Q2-superuser)
 - [Qidi Q2 factory firmware and RKDevTool (Google Drive)](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
 - [This guide on GitHub](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide)
 
