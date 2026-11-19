@@ -35,10 +35,11 @@ A quick start guide to QOL improvements and integrations for the Qidi Q2.
   - [Spoolman with the Qidi Box (q2-spoolbridge)](#spoolman-with-the-qidi-box-q2-spoolbridge)
   - [Ellis print tuning guide](#ellis-print-tuning-guide)
   - [bluedrool tuning tweaks and mods](#bluedrool-tuning-tweaks-and-mods)
-- [6. Recovery and Downgrading Firmware](#6-recovery-and-downgrading-firmware)
+- [6. Printable Mods](#6-printable-mods)
+- [7. Recovery and Downgrading Firmware](#7-recovery-and-downgrading-firmware)
   - [Factory reset via USB-C](#factory-reset-via-usb-c)
   - [Downgrading firmware to v1.1.1](#downgrading-firmware-to-v111)
-- [7. Reference](#7-reference)
+- [8. Reference](#8-reference)
   - [Macro and config files](#macro-and-config-files)
   - [Sources](#sources)
   - [PDF version](#pdf-version)
@@ -67,7 +68,7 @@ Thank you to all of you, who are much smarter than I am, for putting together th
 
 None of this is required. You can do all of it, none of it, or just the parts that sound useful.
 
-That said, **do section 1 first.** Backing up and creating your own config file is what makes everything after it safe and easy to undo. After that, sections 2 through 5 can be done in any order. Section 6 is there for when things go wrong.
+That said, **do section 1 first.** Backing up and creating your own config file is what makes everything after it safe and easy to undo. After that, sections 2 through 6 can be done in any order. Section 7 is there for when things go wrong.
 
 Any macro or code file mentioned in the guide lives in the [Resources](Resources) folder and is linked where it's used.
 
@@ -86,6 +87,17 @@ Before you edit anything, save copies of the files you'll be changing, mainly `p
 In Fluidd, go to the configuration page from the left side menu, right-click a file and choose **Download** to save a copy to your computer. Do this again any time you have a setup you're happy with.
 
 You'll want these if you ever need to [factory reset](#factory-reset-via-usb-c), since a reset wipes all your config changes.
+
+#### Automatic backups with Klipper-Backup
+
+If you'd rather not download your config files by hand every time, [Klipper-Backup](https://github.com/Staubgeborener/klipper-backup) by Staubgeborener backs them up to a GitHub repository for you, either when you run it or on a schedule. You'll need a free GitHub account and a private repo to back up to. SSH into the printer the same way as the [Octoeverywhere steps](#install-octoeverywhere) and run:
+
+```bash
+curl -fsSL get.klipperbackup.xyz | bash
+~/klipper-backup/install.sh
+```
+
+The installer walks you through connecting it to GitHub. The full docs are at [klipperbackup.xyz](https://klipperbackup.xyz). I haven't tried it on the Q2 yet.
 
 ### Update firmware first
 
@@ -379,7 +391,21 @@ You can use an old cotton rag to clean oozing filament off your nozzle. It works
 
 ---
 
-## 6. Recovery and Downgrading Firmware
+## 6. Printable Mods
+
+Some printable upgrades and fixes for the Q2 that I like or that are popular in the community. Print the parts in a heat-resistant material like ABS or ASA if they're going inside the enclosure.
+
+- **[Purge waste bin](https://www.printables.com/model/1428946-purge-poop-waste-bin-box-for-qidi-q2):** The poop bin I personally use. There are a ton out there. Take your pick.
+- **[Spool holder and Box hub bracket](https://www.printables.com/model/1494002-qidi-q2-q2c-spool-holder-and-box-hub-bracket):** A bracket that combines the stock spool holder and the Qidi Box hub.
+- **[Enclosure dust cover](https://www.printables.com/model/1447667-enclosure-dust-cover-for-qidi-q2):** A cover for the enclosure that keeps dust and dropped screws from falling inside the front lip.
+- **[Custom fan duct](https://www.printables.com/model/1473087-qidi-q2-custom-fan-duct):** A lighter part cooling duct and fan mount with more balanced airflow and better cooling than stock. This seems to be the most popular one, but it needs a new toolhead cover.
+- **[Improved cooling fan housing and duct](https://www.printables.com/model/1467887-qidi-q2-improved-cooling-fan-new-housing-duct-for):** A new part cooling fan housing and duct for better cooling. Unlike the custom fan duct above, it works with the stock toolhead cover.
+- **[TPU fixer](https://www.printables.com/model/1491712-qidi-q2-tpu-fixer):** A small printed fix that helps the Q2 feed and print TPU and other flexible filaments more reliably.
+- **[Reference files](https://wiki.qidi3d.com/en/Q2):** A collection of files on the Q2 Wiki from Qidi. Includes some printer design files, calibration prints, risers, poop chutes, overhead spool holders, lid storage, and more.
+
+---
+
+## 7. Recovery and Downgrading Firmware
 
 ### Factory reset via USB-C
 
@@ -444,7 +470,7 @@ You'll need to do the [factory reset steps above](#factory-reset-via-usb-c) firs
 
 ---
 
-## 7. Reference
+## 8. Reference
 
 ### Macro and config files
 
@@ -475,6 +501,9 @@ Everything lives in the [Resources](Resources) folder:
 - [Rod Sloth (Printables)](https://www.printables.com/model/605305-rod-sloth-fits-most-3d-printers-prusa-bambu-creali)
 - [Warre118: q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge)
 - [Camden-Winder: Qidi Q2 Superuser](https://github.com/Camden-Winder/Qidi-Q2-superuser)
+- [Staubgeborener: Klipper-Backup](https://github.com/Staubgeborener/klipper-backup)
+- [Qidi Wiki: Q2](https://wiki.qidi3d.com/en/Q2)
+- Printable mods: [purge waste bin](https://www.printables.com/model/1428946-purge-poop-waste-bin-box-for-qidi-q2), [spool holder and Box hub bracket](https://www.printables.com/model/1494002-qidi-q2-q2c-spool-holder-and-box-hub-bracket), [enclosure dust cover](https://www.printables.com/model/1447667-enclosure-dust-cover-for-qidi-q2), [custom fan duct](https://www.printables.com/model/1473087-qidi-q2-custom-fan-duct), [improved cooling fan housing](https://www.printables.com/model/1467887-qidi-q2-improved-cooling-fan-new-housing-duct-for), [TPU fixer](https://www.printables.com/model/1491712-qidi-q2-tpu-fixer)
 - [Qidi Q2 factory firmware and RKDevTool (Google Drive)](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
 - [This guide on GitHub](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide)
 
