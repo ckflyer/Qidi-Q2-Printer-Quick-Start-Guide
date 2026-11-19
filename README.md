@@ -347,11 +347,12 @@ LUBE_IT
 ```
 
 It homes (if needed), runs X and Y back and forth across their full travel and diagonally, then runs the bed up and down the full length of the leadscrews. It does 5 passes by default and stays 20mm away from the edges. You can change that with `LUBE_IT PASSES=10` in the console. The other options are listed at the top of the file.
+
 THIS IS UNTESTED BE CAREFUL!!!!!!
 
 ### Spoolman with the Qidi Box (q2-spoolbridge)
 
-[q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge) by Warre118 connects the Qidi Box to [Spoolman](https://github.com/Donkie/Spoolman)and keeps track of how much filament is left on each spool. You assign a spool to each Box slot in Fluidd, and it automatically switches the active spool to whatever slot the Box has loaded. It also corrects the usage counts that Moonraker gets wrong during tool changes and purges. This is built for version 01.01.03.x, so I haven't personally tested it, but looks like a pretty cool project.
+[q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge) by Warre118 connects the Qidi Box to [Spoolman](https://github.com/Donkie/Spoolman) and keeps track of how much filament is left on each spool. You assign a spool to each Box slot in Fluidd, and it automatically switches the active spool to whatever slot the Box has loaded. It also corrects the usage counts that Moonraker gets wrong during tool changes and purges. This is built for version 01.01.03.x, so I haven't personally tested it, but looks like a pretty cool project.
 
 ### Ellis print tuning guide
 
@@ -426,7 +427,7 @@ Everything lives in the [Resources](Resources) folder:
 | [Better_Purge_Line.gcode](Resources/Better_Purge_Line.gcode) | Replacement purge line for your slicer's start gcode | [Better purge line](#better-purge-line) |
 | [ORCA_QIDI_BOX.cfg](Resources/ORCA_QIDI_BOX.cfg) | Macro for using the Qidi Box with Orca Slicer | [ORCA_QIDI_BOX macro](#orca_qidi_box-macro) |
 | [SPEED_TEST.cfg](Resources/SPEED_TEST.cfg) | Acceleration and motor current test macro | [Acceleration speed test macro](#acceleration-speed-test-macro) |
-| [LUBE_SPREAD.cfg](Resources/LUBE_SPREAD.cfg) | Spreads lube along the rods and leadscrews | [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws) |
+| [LUBE_IT.cfg](Resources/LUBE_IT.cfg) | Spreads lube along the rods and leadscrews | [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws) |
 | [Original PDF guide](<Resources/Qidi Q2 Printer Quick Start Guide (original).pdf>) | The first version of this guide | [PDF version](#pdf-version) |
 
 ### Sources
