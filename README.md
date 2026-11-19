@@ -308,7 +308,7 @@ More info: [Mobileraker](https://github.com/Clon1998/mobileraker) and [Mobilerak
 
 ---
 
-## 5. Advanced Tuning and Extras
+## 5. Advanced Tuning, Extras, and Tips
 
 ### Acceleration speed test macro
 
@@ -323,6 +323,18 @@ SPEED_TEST SPEED=300 ACCEL=5000 BOUND=30 ITERATIONS=5
 ```
 
 It homes, runs a test pattern, then homes again. Compare the two `GET_POSITION` outputs: if the MCU positions differ by more than one full step, the motors skipped.
+
+### Lubricating and cleaning your linear rods and screws
+
+#### Linear rods
+
+Use a clean cloth to wipe down the rods. Apply a small amount of Super Lube (I've read to use Super Lube without syncolon, but not 100%) and apply by wiping the rods once more. You don't need a lot. Do not use grease!
+
+#### Leadscrews
+
+Use the Rod Sloth (https://www.printables.com/model/605305-rod-sloth-fits-most-3d-printers-prusa-bambu-creali) to clean out the screws with a thin rag and some IPA. Raise or lower your bed all the way and apply the grease that came with the printer, or white lithium grease.
+
+Once your screws and rods have been lubed you can add and run this gcode macro to spread the lube.
 
 ### Ellis print tuning guide
 
