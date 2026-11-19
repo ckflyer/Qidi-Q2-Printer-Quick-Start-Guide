@@ -207,7 +207,7 @@ This may have just been a me issue. I haven't heard or seen others having it, bu
 
 [Qidi Q2 Superuser](https://github.com/Camden-Winder/Qidi-Q2-superuser) by Camden-Winder is an all-in-one installer that sets up a bunch of upgrades from a single SSH command, without hand-editing config files. It includes faster `PRINT_START` and `PRINT_END` macros, KAMP adaptive bed meshing, Happy Hare MMU firmware and the HelixScreen touchscreen UI for the Qidi Box, and an optional Mainsail web UI. It also turns off unused processes so the system runs better. Every install makes a timestamped backup that you can revert to from the menu.
 
-It looks really interesting, but I have yet to try it myself. It covers some of the same ground as this section (like `PRINT_START` and KAMP), so you'd probably use it instead of those steps rather than alongside them. Check out its [install guide](https://github.com/Camden-Winder/Qidi-Q2-superuser/wiki/Q2-Install-Guide) before diving in.
+It looks really interesting, but I have yet to try it myself. It covers some of the same ground as this section (like `PRINT_START` and KAMP), so you'd probably use it instead of those steps rather than alongside them. Check out his [install guide](https://github.com/Camden-Winder/Qidi-Q2-superuser/wiki/Q2-Install-Guide).
 
 ---
 
