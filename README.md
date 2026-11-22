@@ -28,18 +28,19 @@ A quick start guide to QOL improvements and integrations for the Qidi Q2.
 - [4. Remote Monitoring](#4-remote-monitoring)
   - [Install Octoeverywhere](#install-octoeverywhere)
   - [Mobileraker phone app](#mobileraker-phone-app)
-- [5. Advanced Tuning, Extras, and Tips](#5-advanced-tuning-extras-and-tips)
+- [5. Tuning](#5-tuning)
   - [Acceleration speed test macro](#acceleration-speed-test-macro)
-  - [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws)
-  - [Cleaning your nozzle](#cleaning-your-nozzle)
-  - [Spoolman with the Qidi Box (q2-spoolbridge)](#spoolman-with-the-qidi-box-q2-spoolbridge)
   - [Ellis print tuning guide](#ellis-print-tuning-guide)
   - [bluedrool tuning tweaks and mods](#bluedrool-tuning-tweaks-and-mods)
-- [6. Printable Mods](#6-printable-mods)
-- [7. Recovery and Downgrading Firmware](#7-recovery-and-downgrading-firmware)
+- [6. Add-ons, Extras, and Tips](#6-add-ons-extras-and-tips)
+  - [Spoolman with the Qidi Box (q2-spoolbridge)](#spoolman-with-the-qidi-box-q2-spoolbridge)
+  - [Lubricating and cleaning your linear rods and screws](#lubricating-and-cleaning-your-linear-rods-and-screws)
+  - [Cleaning your nozzle](#cleaning-your-nozzle)
+- [7. Printable Mods](#7-printable-mods)
+- [8. Recovery and Downgrading Firmware](#8-recovery-and-downgrading-firmware)
   - [Factory reset via USB-C](#factory-reset-via-usb-c)
   - [Downgrading firmware to v1.1.1](#downgrading-firmware-to-v111)
-- [8. Reference](#8-reference)
+- [9. Reference](#9-reference)
   - [Macro and config files](#macro-and-config-files)
   - [Sources](#sources)
   - [PDF version](#pdf-version)
@@ -68,7 +69,7 @@ Thank you to all of you, who are much smarter than I am, for putting together th
 
 None of this is required. You can do all of it, none of it, or just the parts that sound useful.
 
-That said, **do section 1 first.** Backing up and creating your own config file is what makes everything after it safe and easy to undo. After that, sections 2 through 6 can be done in any order. Section 7 is there for when things go wrong.
+That said, **do section 1 first.** Backing up and creating your own config file is what makes everything after it safe and easy to undo. After that, sections 2 through 7 can be done in any order. Section 8 is there for when things go wrong.
 
 Any macro or code file mentioned in the guide lives in the [Resources](Resources) folder and is linked where it's used.
 
@@ -331,7 +332,7 @@ More info: [Mobileraker](https://github.com/Clon1998/mobileraker) and [Mobilerak
 
 ---
 
-## 5. Advanced Tuning, Extras, and Tips
+## 5. Tuning
 
 ### Acceleration speed test macro
 
@@ -346,6 +347,22 @@ SPEED_TEST SPEED=300 ACCEL=5000 BOUND=30 ITERATIONS=5
 ```
 
 It homes, runs a test pattern, then homes again. Compare the two `GET_POSITION` outputs: if the MCU positions differ by more than one full step, the motors skipped.
+
+### Ellis print tuning guide
+
+[Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/) is the go-to reference for dialing in your prints. The motor current article linked above comes from here.
+
+### bluedrool tuning tweaks and mods
+
+[bluedrool's Qidi Q2 tuning tweaks and mods](https://github.com/bluedrool/Qidi-Q2-tuning-tweaks-and-mods) has some great extra guides. I've only tried the [TMC autotune](https://github.com/bluedrool/Qidi-Q2-tuning-tweaks-and-mods/blob/main/docs/autotune.md) and couldn't get it working properly, but I've heard good things about the other guides.
+
+---
+
+## 6. Add-ons, Extras, and Tips
+
+### Spoolman with the Qidi Box (q2-spoolbridge)
+
+[q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge) by Warre118 connects the Qidi Box to [Spoolman](https://github.com/Donkie/Spoolman) and keeps track of how much filament is left on each spool. You assign a spool to each Box slot in Fluidd, and it automatically switches the active spool to whatever slot the Box has loaded. It also corrects the usage counts that Moonraker gets wrong during tool changes and purges. This is built for version 01.01.03.x, so I haven't personally tested it, but looks like a pretty cool project.
 
 ### Lubricating and cleaning your linear rods and screws
 
@@ -377,21 +394,9 @@ This took me way too long to figure out, so I figured I'd throw it in here.
 
 You can use an old cotton rag to clean oozing filament off your nozzle. It works amazingly. I use old socks or a cut-up T-shirt. Just make sure it's **100% cotton**. I like socks because they're usually thicker, so it's harder to burn yourself through them.
 
-### Spoolman with the Qidi Box (q2-spoolbridge)
-
-[q2-spoolbridge](https://github.com/Warre118/q2-spoolbridge) by Warre118 connects the Qidi Box to [Spoolman](https://github.com/Donkie/Spoolman) and keeps track of how much filament is left on each spool. You assign a spool to each Box slot in Fluidd, and it automatically switches the active spool to whatever slot the Box has loaded. It also corrects the usage counts that Moonraker gets wrong during tool changes and purges. This is built for version 01.01.03.x, so I haven't personally tested it, but looks like a pretty cool project.
-
-### Ellis print tuning guide
-
-[Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/) is the go-to reference for dialing in your prints. The motor current article linked above comes from here.
-
-### bluedrool tuning tweaks and mods
-
-[bluedrool's Qidi Q2 tuning tweaks and mods](https://github.com/bluedrool/Qidi-Q2-tuning-tweaks-and-mods) has some great extra guides. I've only tried the [TMC autotune](https://github.com/bluedrool/Qidi-Q2-tuning-tweaks-and-mods/blob/main/docs/autotune.md) and couldn't get it working properly, but I've heard good things about the other guides.
-
 ---
 
-## 6. Printable Mods
+## 7. Printable Mods
 
 Some printable upgrades and fixes for the Q2 that I like or that are popular in the community. Print the parts in a heat-resistant material like ABS or ASA if they're going inside the enclosure.
 
@@ -405,7 +410,7 @@ Some printable upgrades and fixes for the Q2 that I like or that are popular in 
 
 ---
 
-## 7. Recovery and Downgrading Firmware
+## 8. Recovery and Downgrading Firmware
 
 ### Factory reset via USB-C
 
@@ -470,7 +475,7 @@ You'll need to do the [factory reset steps above](#factory-reset-via-usb-c) firs
 
 ---
 
-## 8. Reference
+## 9. Reference
 
 ### Macro and config files
 
@@ -503,7 +508,6 @@ Everything lives in the [Resources](Resources) folder:
 - [Camden-Winder: Qidi Q2 Superuser](https://github.com/Camden-Winder/Qidi-Q2-superuser)
 - [Staubgeborener: Klipper-Backup](https://github.com/Staubgeborener/klipper-backup)
 - [Qidi Wiki: Q2](https://wiki.qidi3d.com/en/Q2)
-- Printable mods: [purge waste bin](https://www.printables.com/model/1428946-purge-poop-waste-bin-box-for-qidi-q2), [spool holder and Box hub bracket](https://www.printables.com/model/1494002-qidi-q2-q2c-spool-holder-and-box-hub-bracket), [enclosure dust cover](https://www.printables.com/model/1447667-enclosure-dust-cover-for-qidi-q2), [custom fan duct](https://www.printables.com/model/1473087-qidi-q2-custom-fan-duct), [improved cooling fan housing](https://www.printables.com/model/1467887-qidi-q2-improved-cooling-fan-new-housing-duct-for), [TPU fixer](https://www.printables.com/model/1491712-qidi-q2-tpu-fixer)
 - [Qidi Q2 factory firmware and RKDevTool (Google Drive)](https://drive.google.com/drive/folders/1DSWuDp-SBexRj-f-FzzQahNxTc9IDZGr)
 - [This guide on GitHub](https://github.com/ckflyer/Qidi-Q2-Printer-Quick-Start-Guide)
 
